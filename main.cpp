@@ -4,6 +4,7 @@
 
 #include "cafenea.h"
 #include "manager.h"
+#include "utilizator.h"
 
 using namespace std;
 
@@ -18,8 +19,82 @@ int choose_language(int &choice){
 
 
 
+
 void menu(int isRomanian) {
     system("clear");
+
+    // Selectarea rolului
+    if(isRomanian == 1){
+        cout << "==================================" << endl;
+        cout << "          Selectati rolul          " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Manager" << endl;
+        cout << "2. Angajat" << endl;
+    } else {
+        cout << "==================================" << endl;
+        cout << "          Select the role          " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Manager" << endl;
+        cout << "2. Employee" << endl;
+    }
+
+    int role;
+    cin >> role;
+
+    if(role == 1){
+        system("clear");
+        cout << "==================================" << endl;
+        if(isRomanian == 1){
+            cout << "          Autentificare            " << endl;
+            cout << "==================================" << endl;
+            cout << "Introduceti numele de utilizator: ";
+        } else {
+            cout << "==================================" << endl;
+            cout << "          Authentication          " << endl;
+            cout << "==================================" << endl;
+            cout << "Enter the username: ";
+        }
+        string username;
+        cin >> username;
+
+        cout << "Introduceti parola: ";
+        string password;
+        cin >> password;
+
+        if (username != "admin" || password != "admin") {
+            cout << "Autentificare esuata! Incercati din nou." << endl;
+            return;
+        }
+
+        system("clear");
+    }else{
+        Utilizator user;
+        cout << "==================================" << endl;
+        cout << "          Autentificare            " << endl;
+        cout << "==================================" << endl;
+        cout << "1.Sign up" << endl;
+        cout << "2. Login" << endl;
+        cout << "3. Exit" << endl;
+        cout << "Select an option: ";
+
+        int optiune;
+        cin >> optiune;
+
+        switch(optiune){
+            case 1:
+                user.createAccount();
+                break;
+            case 2:  //Exceptions
+                try{
+                    user.login();
+                } catch (const char* msg){
+                    cout << msg << endl;
+                    return;
+                }
+                break;
+        }
+
+    }
 
     // Selectarea orasului
     cout << "==================================" << endl;
@@ -85,11 +160,15 @@ void menu(int isRomanian) {
     int optiune;
     cin >> optiune;
 
-    Manager manager;
     // Gestionarea optiunilor
     switch (optiune) {
         case 1:
+            if(role == 1){
+            Manager manager;
             manager.addEmployee();
+            } else {
+                cout << "Utilizatorul nu are permisiunea de a adauga angajati." << endl;
+            }
             break;
         case 2: {
             Cafenea cafenea;
