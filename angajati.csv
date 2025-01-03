@@ -1,16 +1,18 @@
-Oras,Cafenea,Nume,Prenume,Funcție,Ora Începere,Ora Sfârșit
-București,Cafenea Unirii,Ion,Popescu,Barista,08:00,16:00
-București,Cafenea Unirii,Maria,Ionescu,Manager,09:00,17:00
-București,Cafenea Unirii,Elena,Georgescu,Ospătar,10:00,18:00
-Cluj-Napoca,Cafenea Central,Ana,Vasilescu,Ospătar,08:00,16:00
-Cluj-Napoca,Cafenea Central,Mihai,Georgescu,Manager,09:00,17:00
-Cluj-Napoca,Cafenea Central,Andreea,Pop,Barista,07:00,15:00
-Timișoara,Cafenea Liberty,Elena,Dumitrescu,Barista,10:00,18:00
-Timișoara,Cafenea Liberty,Andrei,Popa,Ospătar,11:00,19:00
-Timișoara,Cafenea Liberty,Ioana,Vasile,Manager,09:00,17:00
-Iași,Cafenea Copou,Ioana,Marin,Manager,08:30,16:30
-Iași,Cafenea Copou,Alexandru,Radu,Barista,07:30,15:30
-Iași,Cafenea Copou,Cristina,Ene,Ospătar,10:00,18:00
-Brașov,Cafenea Piața Sfatului,Daniel,Vasile,Manager,09:00,17:00
-Brașov,Cafenea Piața Sfatului,Simona,Ionescu,Barista,08:00,16:00
-Brașov,Cafenea Piața Sfatului,Mihai,Ene,Ospătar,10:00,18:00
+Oras,Nume Complet,Functie,Ora Incepere,Ora Sfarsit
+Bucuresti,Popescu Ion,Barista,08:00,16:00
+Bucuresti,Ionescu Maria,Manager,09:00,17:00
+Bucuresti,Georgescu Elena,Ospatar,10:00,18:00
+Cluj-Napoca,Vasilescu Ana,Ospatar,08:00,16:00
+Cluj-Napoca,Georgescu Mihai,Manager,09:00,17:00
+Cluj-Napoca,Pop Andreea,Barista,07:00,15:00
+Timisoara,Dumitrescu Elena,Barista,10:00,18:00
+Timisoara,Popa Andrei,Ospatar,11:00,19:00
+Timisoara,Vasile Ioana,Manager,09:00,17:00
+Iasi,Marin Ioana,Manager,08:30,16:30
+Iasi,Radu Alexandru,Barista,07:30,15:30
+Iasi,Ene Cristina,Ospatar,10:00,18:00
+Brasov,Vasile Daniel,Manager,09:00,17:00
+Brasov,Ionescu Simona,Barista,08:00,16:00
+Brasov,Ene Mihai,Ospatar,10:00,18:00
+Bucuresti,Lican,Stefan,18:10,23:30
+Iasi,Ionut Cercel,ospatar,22:00,6:00

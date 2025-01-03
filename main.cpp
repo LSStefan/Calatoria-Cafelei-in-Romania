@@ -1,7 +1,9 @@
 #include <iostream>
-#include "angajat.h"
 #include <fstream>
 #include <stdlib.h>
+
+#include "cafenea.h"
+#include "manager.h"
 
 using namespace std;
 
@@ -15,46 +17,100 @@ int choose_language(int &choice){
 }
 
 
-void menu(int isRomanian) {
-    system("clear"); 
-    switch(isRomanian){
-        case 1:
-           cout << 'Alege cafeneaua dorita: ' << endl;
-              cout << "1.Bucuresti" << endl;
-                cout << "2.Cluj" << endl;
-                cout << "3.Iasi" << endl;
-                cout << "4.Timisoara" << endl;
-                cout << "5.Brasov" << endl;
 
-        case 2:
-            cout << "Choose the desired coffee shop: " << endl;
-            cout << "1.Bucuresti" << endl;
-            cout << "2.Cluj" << endl;
-            cout << "3.Iasi" << endl;
-            cout << "4.Timisoara" << endl;
-            cout << "5.Brasov" << endl;
+void menu(int isRomanian) {
+    system("clear");
+
+    // Selectarea orasului
+    cout << "==================================" << endl;
+    if (isRomanian == 1) {
+        cout << "        Alege cafeneaua dorita     " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Bucuresti" << endl;
+        cout << "2. Cluj-Napoca" << endl;
+        cout << "3. Iasi" << endl;
+        cout << "4. Timisoara" << endl;
+        cout << "5. Brasov" << endl;
+    } else {
+        cout << "    Choose the desired coffee shop " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Bucuresti" << endl;
+        cout << "2. Cluj-Napoca" << endl;
+        cout << "3. Iasi" << endl;
+        cout << "4. Timisoara" << endl;
+        cout << "5. Brasov" << endl;
     }
+    cout << "==================================" << endl;
+    cout << "Selectati o optiune: ";
 
     int oras;
     cin >> oras;
 
-    switch(isRomanian){
-        case 1:
-            cout << "1.Adauga angajat" << endl;
-            cout << "2.Afiseaza angajatii" << endl;
-            cout << "3.Afiseaza produsele" << endl;
-            cout << "4.Iesire" << endl;
-        
-        case 2:
-            cout << "1.Add employee" << endl;
-            cout << "2.Display employees" << endl;
-            cout << "3.Display products" << endl;
-            cout << "4.Exit" << endl;
+    string nume_oras;
+    switch (oras) {
+        case 1: nume_oras = "Bucuresti"; break;
+        case 2: nume_oras = "Cluj-Napoca"; break;
+        case 3: nume_oras = "Iasi"; break;
+        case 4: nume_oras = "Timisoara"; break;
+        case 5: nume_oras = "Brasov"; break;
+        default:
+            cout << "Optiune invalida! Incercati din nou." << endl;
+            return;
     }
-    
 
+    system("clear");
 
+    // Meniu principal
+    cout << "==================================" << endl;
+    if (isRomanian == 1) {
+        cout << "          Meniu principal          " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Adauga angajat" << endl;
+        cout << "2. Afiseaza angajatii" << endl;
+        cout << "3. Afiseaza produsele" << endl;
+        cout << "4. Iesire" << endl;
+        cout << "5. Inapoi" << endl;
+    } else {
+        cout << "          Main Menu                " << endl;
+        cout << "==================================" << endl;
+        cout << "1. Add employee" << endl;
+        cout << "2. Display employees" << endl;
+        cout << "3. Display products" << endl;
+        cout << "4. Exit" << endl;
+        cout << "5. Back" << endl;
+    }
+    cout << "==================================" << endl;
+    cout << "Select an option: ";
+
+    int optiune;
+    cin >> optiune;
+
+    Manager manager;
+    // Gestionarea optiunilor
+    switch (optiune) {
+        case 1:
+            manager.addEmployee();
+            break;
+        case 2: {
+            Cafenea cafenea;
+            cafenea.displayEmployees(nume_oras);
+            break;
+        }
+        case 3:
+            cout << "Functionalitatea pentru a afisa produsele nu este implementata inca." << endl;
+            break;
+        case 4:
+            cout << "Iesire din aplicatie. La revedere!" << endl;
+            return;
+        case 5:
+            menu(isRomanian);
+            break;
+        default:
+            cout << "Optiune invalida! Incercati din nou." << endl;
+    }
 }
+
+
 
 
 int main(){

@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 
+#ifndef ANGAJAT_H
+#define ANGAJAT_H
 class Angajat{
-    private:
+    public:
         string nume;
         string functie;
         string inceputMunca;
@@ -23,3 +25,4 @@ class Angajat{
             this->sfarsitMunca = sfarsitMunca;
         }
 };
+#endif
