@@ -4,7 +4,7 @@ using namespace std;
 #ifndef ANGAJAT_H
 #define ANGAJAT_H
 class Angajat{
-    public:
+    private:
         string nume;
         string functie;
         string inceputMunca;
@@ -24,5 +24,8 @@ class Angajat{
             this->inceputMunca = inceputMunca;
             this->sfarsitMunca = sfarsitMunca;
         }
+
+        //friend class
+        friend class Cafenea;
 };
 #endif
