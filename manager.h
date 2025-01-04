@@ -31,4 +31,34 @@ class Manager : public Angajat{
             file << oras << "," << nume << "," << functie << "," << inceputMunca << "," << sfarsitMunca << endl;
             file.close();
         }
+
+        void removeEmployee(string loc){
+            string nume;
+            cout << "Introduceti numele angajatului pe care doriti sa il stergeti: ";
+            getline(cin >> ws, nume);
+            ifstream file;
+            ofstream tempFile;
+            file.open("angajati.csv");
+            tempFile.open("temp.csv");
+            string line;
+            while (getline(file, line))
+            {
+                stringstream ss(line);
+                string oras, numeFisier, functie, inceputMunca, sfarsitMunca;
+                getline(ss, oras, ',');           // Extrage orașul
+                getline(ss, numeFisier, ',');          // Extrage numele
+                getline(ss, functie, ',');       // Extrage funcția
+                getline(ss, inceputMunca, ',');  // Extrage ora de început
+                getline(ss, sfarsitMunca, ',');  // Extrage ora de sfârșit
+                if (numeFisier != nume){
+                    tempFile << oras << "," << numeFisier << "," << functie << "," << inceputMunca << "," << sfarsitMunca << endl;
+                }
+            
+            }
+            file.close();
+            tempFile.close();
+            remove("angajati.csv");
+            rename("temp.csv", "angajati.csv");
+        }
+
 };

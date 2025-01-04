@@ -10,15 +10,16 @@ using namespace std;
 
 int choose_language(int &choice){
     cout << "Alege limba / Choose language: " << endl;
-    cout << "1. Romana" << endl;
+    cout << "1. Romanian" << endl;
     cout << "2. English" << endl;
+    cout << "Select an option: ";
 
     cin >> choice;
     return choice;
 }
 
 
-
+Cafenea cafenea;
 
 void menu(int isRomanian) {
     system("clear");
@@ -29,13 +30,15 @@ void menu(int isRomanian) {
         cout << "          Selectati rolul          " << endl;
         cout << "==================================" << endl;
         cout << "1. Manager" << endl;
-        cout << "2. Angajat" << endl;
+        cout << "2. Utilizator" << endl;
+        cout << "Selectati un rol: ";
     } else {
         cout << "==================================" << endl;
         cout << "          Select the role          " << endl;
         cout << "==================================" << endl;
         cout << "1. Manager" << endl;
-        cout << "2. Employee" << endl;
+        cout << "2. User" << endl;  
+        cout << "Select a role: ";
     }
 
     int role;
@@ -68,6 +71,7 @@ void menu(int isRomanian) {
 
         system("clear");
     }else{
+        system("clear");
         Utilizator user;
         cout << "==================================" << endl;
         cout << "          Autentificare            " << endl;
@@ -82,7 +86,12 @@ void menu(int isRomanian) {
 
         switch(optiune){
             case 1:
-                user.createAccount();
+                try{
+                    user.createAccount();
+                } catch (const char* msg){
+                    cout << msg << endl;
+                    return;
+                }
                 break;
             case 2:  //Exceptions
                 try{
@@ -93,7 +102,8 @@ void menu(int isRomanian) {
                 }
                 break;
         }
-
+        
+        system("clear");
     }
 
     // Selectarea orasului
@@ -143,16 +153,18 @@ void menu(int isRomanian) {
         cout << "1. Adauga angajat" << endl;
         cout << "2. Afiseaza angajatii" << endl;
         cout << "3. Afiseaza produsele" << endl;
-        cout << "4. Iesire" << endl;
-        cout << "5. Inapoi" << endl;
+        cout << "4. Sterge angajat" << endl;
+        cout << "5. Iesire" << endl;
+        cout << "6. Inapoi" << endl;
     } else {
         cout << "          Main Menu                " << endl;
         cout << "==================================" << endl;
         cout << "1. Add employee" << endl;
         cout << "2. Display employees" << endl;
         cout << "3. Display products" << endl;
-        cout << "4. Exit" << endl;
-        cout << "5. Back" << endl;
+        cout << "4. Remove employee" << endl;
+        cout << "5. Exit" << endl;
+        cout << "6. Back" << endl;
     }
     cout << "==================================" << endl;
     cout << "Select an option: ";
@@ -170,17 +182,20 @@ void menu(int isRomanian) {
                 cout << "Utilizatorul nu are permisiunea de a adauga angajati." << endl;
             }
             break;
-        case 2: {
-            Cafenea cafenea;
+        case 2: 
             cafenea.displayEmployees(nume_oras);
             break;
-        }
         case 3:
-            cout << "Functionalitatea pentru a afisa produsele nu este implementata inca." << endl;
+            cafenea.displayProducts(nume_oras);
             break;
         case 4:
-            cout << "Iesire din aplicatie. La revedere!" << endl;
-            return;
+            if(role == 1){
+                Manager manager;
+                manager.removeEmployee(nume_oras);
+            }else{
+                cout << "Utilizatorul nu are permisiunea de a sterge angajati." << endl;
+            }
+            break;
         case 5:
             menu(isRomanian);
             break;

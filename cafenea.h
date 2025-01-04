@@ -45,4 +45,26 @@ class Cafenea{
                 }
             }
         }
+        void displayProducts(string locatie){
+            ifstream file;
+            file.open("produse.csv");
+            string line;
+            while (getline(file, line))
+            {
+                string oras = line.substr(0, line.find(","));
+                
+                if (oras == locatie) {
+                    stringstream ss(line);
+                    string oras, nume, pret, cantitate;
+
+                    getline(ss, oras, ',');           // Extrage orașul
+                    getline(ss, nume, ',');          // Extrage numele
+                    getline(ss, pret, ',');       // Extrage funcția
+                    getline(ss, cantitate, ',');  // Extrage ora de început
+
+                    cout << nume << "," << pret << "," << cantitate << endl;
+                }
+            }
+        }
+
 };

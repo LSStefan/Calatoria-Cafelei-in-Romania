@@ -1,18 +1,6 @@
-Oras,Nume Complet,Functie,Ora Incepere,Ora Sfarsit
-Bucuresti,Popescu Ion,Barista,08:00,16:00
-Bucuresti,Ionescu Maria,Manager,09:00,17:00
-Bucuresti,Georgescu Elena,Ospatar,10:00,18:00
-Cluj-Napoca,Vasilescu Ana,Ospatar,08:00,16:00
-Cluj-Napoca,Georgescu Mihai,Manager,09:00,17:00
-Cluj-Napoca,Pop Andreea,Barista,07:00,15:00
-Timisoara,Dumitrescu Elena,Barista,10:00,18:00
-Timisoara,Popa Andrei,Ospatar,11:00,19:00
-Timisoara,Vasile Ioana,Manager,09:00,17:00
-Iasi,Marin Ioana,Manager,08:30,16:30
-Iasi,Radu Alexandru,Barista,07:30,15:30
-Iasi,Ene Cristina,Ospatar,10:00,18:00
 Brasov,Vasile Daniel,Manager,09:00,17:00
-Brasov,Ionescu Simona,Barista,08:00,16:00
-Brasov,Ene Mihai,Ospatar,10:00,18:00
-Bucuresti,Lican,Stefan,18:10,23:30
-Iasi,Ionut Cercel,ospatar,22:00,6:00
+Oras,Nume,Functie,Ora_incepere,Ora_terminare
+Bucuresti,Popescu Andrei,Manager,09:00,17:00
+Cluj-Napoca,Marin Alina,Barista,07:00,15:00
+Iasi,Ion Gheorghe,Ospatar,10:00,18:00
+Timisoara,Stan Vasile,Manager,08:00,16:00
