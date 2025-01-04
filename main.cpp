@@ -8,6 +8,47 @@
 
 using namespace std;
 
+
+Cafenea bucuresti("Bucuresti");
+Cafenea cluj("Cluj-Napoca");
+Cafenea iasi("Iasi");
+Cafenea timisoara("Timisoara");
+Cafenea brasov("Brasov");
+
+
+void startup(){
+    ifstream file;
+    file.open("angajati.csv");
+    string line;
+    while(getline(file,line)){
+        stringstream ss(line);
+        string oras;
+        getline(ss, oras, ',');
+        string nume, functie, inceputMunca, sfarsitMunca;
+        getline(ss, nume, ',');
+        getline(ss, functie, ',');
+        getline(ss, inceputMunca, ',');
+        getline(ss, sfarsitMunca, ',');
+        if(oras == "Bucuresti"){
+            Angajat angajat(nume, functie, inceputMunca, sfarsitMunca);
+            bucuresti.angajeaza(angajat);
+        } else if(oras == "Cluj-Napoca"){
+            Angajat angajat(nume, functie, inceputMunca, sfarsitMunca);
+            cluj.angajeaza(angajat);
+        } else if(oras == "Iasi"){
+            Angajat angajat(nume, functie, inceputMunca, sfarsitMunca);
+            iasi.angajeaza(angajat);
+        } else if(oras == "Timisoara"){
+            Angajat angajat(nume, functie, inceputMunca, sfarsitMunca);
+            timisoara.angajeaza(angajat);
+        } else if(oras == "Brasov"){
+            Angajat angajat(nume, functie, inceputMunca, sfarsitMunca);
+            brasov.angajeaza(angajat);
+        }
+    }
+}
+
+
 int choose_language(int &choice){
     cout << "Alege limba / Choose language: " << endl;
     cout << "1. Romanian" << endl;
@@ -183,7 +224,17 @@ void menu(int isRomanian) {
             }
             break;
         case 2: 
-            cafenea.displayEmployees(nume_oras);
+            if(nume_oras == "Bucuresti"){
+                bucuresti.displayEmployees(bucuresti.angajati, bucuresti.nrAngajati);
+            } else if(nume_oras == "Cluj-Napoca"){
+                cluj.displayEmployees(cluj.angajati, cluj.nrAngajati);
+            } else if(nume_oras == "Iasi"){
+                iasi.displayEmployees(iasi.angajati, iasi.nrAngajati);
+            } else if(nume_oras == "Timisoara"){
+                timisoara.displayEmployees(timisoara.angajati, timisoara.nrAngajati);
+            } else if(nume_oras == "Brasov"){
+                brasov.displayEmployees(brasov.angajati, brasov.nrAngajati);
+            }
             break;
         case 3:
             cafenea.displayProducts(nume_oras);
@@ -209,9 +260,13 @@ void menu(int isRomanian) {
 
 int main(){
 
+    startup();
     int choice;
     choose_language(choice);
     menu(choice);
+
+    
+
 
     return 0;
 }
