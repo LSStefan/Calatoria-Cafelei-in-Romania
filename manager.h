@@ -32,7 +32,7 @@ class Manager : public Angajat{
             file.close();
         }
 
-        void removeEmployee(string loc){
+        void removeEmployee(){
             string nume;
             cout << "Introduceti numele angajatului pe care doriti sa il stergeti: ";
             getline(cin >> ws, nume);

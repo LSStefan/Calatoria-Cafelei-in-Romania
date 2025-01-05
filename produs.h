@@ -9,6 +9,7 @@ class Produs{
         string oras;
         string nume;
         string pret;
+        int cantitate = 0;
 
     public:
         Produs(){
@@ -16,10 +17,11 @@ class Produs{
             nume = "";
             pret = "";
         }
-        Produs(string oras, string nume, string pret){
+        Produs(string oras, string nume, string pret, int cantitate){
             this->oras = oras;
             this->nume = nume;
             this->pret = pret;
+            this->cantitate = cantitate;
         }
         
 };

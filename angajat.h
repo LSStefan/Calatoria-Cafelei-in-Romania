@@ -25,6 +25,7 @@ class Angajat{
             this->sfarsitMunca = sfarsitMunca;
         }
 
+
         //friend class
         friend class Cafenea;
         friend class Manager;

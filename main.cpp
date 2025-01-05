@@ -20,6 +20,35 @@ Utilizator user;
 
 int profit_zilnic = 0;
 
+void generareRaport(){
+    ofstream file;
+    file.open("raport.csv", ios::app);
+    file << "Profit zilnic: " << profit_zilnic << endl;
+    int salariiangajati;
+    if(bucuresti.nrAngajati > 0){
+        salariiangajati = bucuresti.nrAngajati * 3000;
+        file << "Salarii angajati Bucuresti: " << salariiangajati << endl;
+    }
+    if(cluj.nrAngajati > 0){
+        salariiangajati = cluj.nrAngajati * 2000;
+        file << "Salarii angajati Cluj-Napoca: " << salariiangajati << endl;
+    }
+    if(iasi.nrAngajati > 0){
+        salariiangajati = iasi.nrAngajati * 2000;
+        file << "Salarii angajati Iasi: " << salariiangajati << endl;
+    }
+    if(timisoara.nrAngajati > 0){
+        salariiangajati = timisoara.nrAngajati * 2500;
+        file << "Salarii angajati Timisoara: " << salariiangajati << endl;
+    }
+    if(brasov.nrAngajati > 0){
+        salariiangajati = brasov.nrAngajati * 2900;
+        file << "Salarii angajati Brasov: " << salariiangajati << endl;
+    }
+    file << "\n";
+    file.close();
+}
+
 void startup(){
     ifstream file;
     file.open("angajati.csv");
@@ -60,7 +89,7 @@ void startup(){
         getline(ss, tip, ',');
         getline(ss, nume, ',');
         getline(ss, pret, ',');
-        Produs produs(oras, nume, pret);
+        Produs produs(oras, nume, pret,10);
         if(oras == "Bucuresti"){
             bucuresti.adaugaProdus(produs);
         } else if(oras == "Cluj-Napoca"){
@@ -289,7 +318,7 @@ void menu(int isRomanian) {
             case 4:
                 if(role == 1){
                     Manager manager;
-                    manager.removeEmployee(nume_oras);
+                    manager.removeEmployee();
                 }else{
                     cout << "Utilizatorul nu are permisiunea de a sterge angajati." << endl;
                 }
@@ -327,6 +356,8 @@ void menu(int isRomanian) {
                 return;
             case 7:
                 cout << "Profitul zilnic este: " << profit_zilnic << endl;
+                generareRaport();
+                return;
             case 8:
                 system("clear");
                 menu(isRomanian);

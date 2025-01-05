@@ -67,13 +67,12 @@ class Cafenea{
                     // Parsează numărul produsului și cantitatea
                     numar = stoi(input);
                     cin >> cantitate;
-
                     // Validare intrări
                     if (numar < 1 || numar > nrProduse) {
                         cout << "Numar produs invalid. Incercati din nou." << endl;
                         continue;
                     }
-                    if (cantitate <= 0) {
+                    if (cantitate <= 0 || cantitate > produse[numar - 1].cantitate) {
                         cout << "Cantitate invalida. Incercati din nou." << endl;
                         continue;
                     }
@@ -106,6 +105,8 @@ class Cafenea{
                 cout << "Felicitari! Ai primit un voucher de 10% reducere pentru ca esti client fidel." << endl;
                 total = total - (total * 0.1);
             }
+
+            produse[numar - 1].cantitate -= cantitate;
             cout << "Total comanda: " << total << endl;
             return total;
         }
@@ -125,6 +126,50 @@ class Cafenea{
             file.open("evenimente.csv", ios::app);
             file << this->locatie << "," << event << endl;
             file.close();
+        }
+
+        void addProduct(){
+            string nume, pret;
+            int cantitate;
+            cout << "Introduceti numele produsului: ";
+            getline(cin >> ws, nume);
+            cout << "Introduceti pretul produsului: ";
+            cin >> pret;
+            cout << "Introduceti cantitatea produsului: ";
+            cin >> cantitate;
+            Produs produs(this->locatie, nume, pret,cantitate);
+            adaugaProdus(produs);
+            ofstream file;
+            file.open("produse.csv", ios::app);
+            file << this->locatie << "," << nume << "," << pret << endl;
+            file.close();
+        }
+
+        void removeProduct(){
+            string nume;
+            cout << "Introduceti numele produsului pe care doriti sa il stergeti: ";
+            getline(cin >> ws, nume);
+            ifstream file;
+            ofstream tempFile;
+            file.open("produse.csv");
+            tempFile.open("temp.csv");
+            string line;
+            while (getline(file, line))
+            {
+                stringstream ss(line);
+                string oras, numeFisier, pret;
+                getline(ss, oras, ',');      
+                getline(ss, numeFisier, ',');       
+                getline(ss, pret, ',');   
+                if (numeFisier != nume && oras == this->locatie){
+                    tempFile << oras << "," << numeFisier << "," << pret << endl;
+                }
+            
+            }
+            file.close();
+            tempFile.close();
+            remove("produse.csv");
+            rename("temp.csv", "produse.csv");
         }
 
 };

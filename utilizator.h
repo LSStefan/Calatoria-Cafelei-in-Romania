@@ -6,6 +6,8 @@
 
 using namespace std;
 
+#ifndef UTILIZATOR_H
+#define UTILIZATOR_H
 
 string passwordStrength(string password){
     int n = password.length();
@@ -142,3 +144,4 @@ class Utilizator{
 string Utilizator::getNume(){
     return nume;
 }
+#endif

@@ -6,3 +6,8 @@ Bula,Ceai Verde,1,8
 ,Cappuccino,1,12
 Gigi,Cappuccino:2:24;Espresso:1:10;Total:34
 ,Latte Macchiato:1:14;Ceai Verde:2:16;Total:30
+,Latte Macchiato:1:14;Total:14
+gogu,Sandwich Cu Somon:5:100;Total:100
+,Cappuccino:2:24;Espresso:1:10;Total:34
+,Ceai Verde:2:16;Latte Macchiato:1:14;Total:30
+,Espresso:2:20;Croissant:2:16;Total:36

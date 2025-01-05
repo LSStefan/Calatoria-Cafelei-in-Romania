@@ -1,26 +1,26 @@
-Oras,Tip Produs,Nume Produs,Pret
-Bucuresti,Cafea,Espresso,10.00
-Bucuresti,Cafea,Cappuccino,12.50
-Bucuresti,Dulciuri,Cheesecake,15.00
-Bucuresti,Dulciuri,Croissant,8.00
-Bucuresti,Sandwichuri,Sandwich Cu Pui,18.00
-Cluj-Napoca,Cafea,Latte Macchiato,14.00
-Cluj-Napoca,Ceai,Ceai Verde,8.50
-Cluj-Napoca,Dulciuri,Tarta cu Lamaie,12.00
-Cluj-Napoca,Sucuri,Suc de Portocale,7.50
-Cluj-Napoca,Sandwichuri,Sandwich Vegetar,16.00
-Timisoara,Cafea,Espresso,10.00
-Timisoara,Cafea,Cappuccino,12.50
-Timisoara,Sucuri,Suc de Mere,7.00
-Timisoara,Dulciuri,Muffin Ciocolata,9.00
-Timisoara,Sandwichuri,Sandwich Cu Branza,15.00
-Iasi,Cafea,Cappuccino,12.50
-Iasi,Dulciuri,Cheesecake,15.00
-Iasi,Ceai,Ceai Verde,8.50
-Iasi,Dulciuri,Tarta cu Mere,11.00
-Iasi,Sandwichuri,Sandwich Cu Somon,20.00
-Brasov,Cafea,Espresso,10.00
-Brasov,Cafea,Latte Macchiato,14.00
-Brasov,Dulciuri,Tarta cu Lamaie,12.00
-Brasov,Sucuri,Suc de Portocale,7.50
-Brasov,Sandwichuri,Sandwich Cu Pui,18.00
+Oras,Tip Produs,Nume Produs,Pret,Cantitate
+Bucuresti,Cafea,Espresso,10.00,50
+Bucuresti,Cafea,Cappuccino,12.50,40
+Bucuresti,Dulciuri,Cheesecake,15.00,30
+Bucuresti,Dulciuri,Croissant,8.00,100
+Bucuresti,Sandwichuri,Sandwich Cu Pui,18.00,25
+Cluj-Napoca,Cafea,Latte Macchiato,14.00,35
+Cluj-Napoca,Ceai,Ceai Verde,8.50,60
+Cluj-Napoca,Dulciuri,Tarta cu Lamaie,12.00,20
+Cluj-Napoca,Sucuri,Suc de Portocale,7.50,80
+Cluj-Napoca,Sandwichuri,Sandwich Vegetar,16.00,15
+Timisoara,Cafea,Espresso,10.00,45
+Timisoara,Cafea,Cappuccino,12.50,50
+Timisoara,Sucuri,Suc de Mere,7.00,70
+Timisoara,Dulciuri,Muffin Ciocolata,9.00,25
+Timisoara,Sandwichuri,Sandwich Cu Branza,15.00,30
+Iasi,Cafea,Cappuccino,12.50,50
+Iasi,Dulciuri,Cheesecake,15.00,20
+Iasi,Ceai,Ceai Verde,8.50,65
+Iasi,Dulciuri,Tarta cu Mere,11.00,40
+Iasi,Sandwichuri,Sandwich Cu Somon,20.00,10
+Brasov,Cafea,Espresso,10.00,55
+Brasov,Cafea,Latte Macchiato,14.00,30
+Brasov,Dulciuri,Tarta cu Lamaie,12.00,25
+Brasov,Sucuri,Suc de Portocale,7.50,90
+Brasov,Sandwichuri,Sandwich Cu Pui,18.00,20
