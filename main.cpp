@@ -18,6 +18,8 @@ Cafenea brasov("Brasov");
 
 Utilizator user;
 
+int profit_zilnic = 0;
+
 void startup(){
     ifstream file;
     file.open("angajati.csv");
@@ -224,8 +226,9 @@ void menu(int isRomanian) {
             cout << "3. Afiseaza produsele" << endl;
             cout << "4. Sterge angajat" << endl;
             cout << "5. Comanda" << endl;
-            cout << "6. Iesire" << endl;
-            cout << "7. Inapoi" << endl;
+            cout << "6. Adauga eveniment special" << endl;
+            cout << "7. Iesire" << endl;
+            cout << "8. Inapoi" << endl;
             
         } else {
             cout << "          Main Menu                " << endl;
@@ -235,8 +238,9 @@ void menu(int isRomanian) {
             cout << "3. Display products" << endl;
             cout << "4. Remove employee" << endl;
             cout << "5. Order" << endl;
-            cout << "6. Exit" << endl;
-            cout << "7. Back" << endl;
+            cout << "6. Add special event" << endl;
+            cout << "7. Exit" << endl;
+            cout << "8. Back" << endl;
             
         }
         cout << "==================================" << endl;
@@ -292,27 +296,46 @@ void menu(int isRomanian) {
                 break;
             case 5:
                 if(nume_oras == "Bucuresti"){
-                    bucuresti.placeorder(user.getNume());
+                    profit_zilnic += bucuresti.placeorder(user.getNume());
                 } else if(nume_oras == "Cluj-Napoca"){
-                    cluj.placeorder(user.getNume());
+                    profit_zilnic += cluj.placeorder(user.getNume());
                 } else if(nume_oras == "Iasi"){
-                    iasi.placeorder(user.getNume());
+                    profit_zilnic += iasi.placeorder(user.getNume());
                 } else if(nume_oras == "Timisoara"){
-                    timisoara.placeorder(user.getNume());
+                    profit_zilnic += timisoara.placeorder(user.getNume());
                 } else if(nume_oras == "Brasov"){
-                    brasov.placeorder(user.getNume());
+                    profit_zilnic += brasov.placeorder(user.getNume());
                 }
                 break;
             case 6:
+                if(role == 1){
+                    if(nume_oras == "Bucuresti"){
+                        bucuresti.addSpecialEvent();
+                    } else if(nume_oras == "Cluj-Napoca"){
+                        cluj.addSpecialEvent();
+                    } else if(nume_oras == "Iasi"){
+                        iasi.addSpecialEvent();
+                    } else if(nume_oras == "Timisoara"){
+                        timisoara.addSpecialEvent();
+                    } else if(nume_oras == "Brasov"){
+                        brasov.addSpecialEvent();
+                    }
+                } else {
+                    cout << "Utilizatorul nu are permisiunea de a adauga evenimente speciale." << endl;
+                }
                 return;
             case 7:
+                cout << "Profitul zilnic este: " << profit_zilnic << endl;
+            case 8:
+                system("clear");
                 menu(isRomanian);
                 break;
             default:
                 cout << "Optiune invalida! Incercati din nou." << endl;
         }
     }
-   
+    
+    
 }
 
 

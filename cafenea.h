@@ -14,6 +14,7 @@ class Cafenea{
         int nrAngajati = 0;
         int nrProduse = 0;
         string locatie;
+        vector<string> evenimente;
 
     public:
         Cafenea(){
@@ -44,7 +45,7 @@ class Cafenea{
             }
         }
 
-       void placeorder(string name) {
+       float placeorder(string name) {
             displayProducts();
             cout << "Comanda: Introduceti numarul produsului si cantitatea sau 'x' pentru iesire." << endl;
 
@@ -101,12 +102,24 @@ class Cafenea{
             }
 
             cout << "Total comanda: " << total << endl;
+            return total;
         }
 
 
         void clear(){
             nrAngajati = 0;
             nrProduse = 0;
+        }
+
+        void addSpecialEvent(){
+            string event;
+            cout << "Introduceti evenimentul special: ";
+            getline(cin >> ws, event);
+            evenimente.push_back(event);
+            ofstream file;
+            file.open("evenimente.csv", ios::app);
+            file << this->locatie << "," << event << endl;
+            file.close();
         }
 
 };
