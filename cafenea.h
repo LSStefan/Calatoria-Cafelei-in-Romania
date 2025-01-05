@@ -3,6 +3,7 @@
 #include <sstream>
 #include "angajat.h"
 #include "produs.h"
+#include "utilizator.h"
 #include <vector>
 
 using namespace std;
@@ -45,13 +46,13 @@ class Cafenea{
             }
         }
 
-       float placeorder(string name) {
+       float placeorder(Utilizator user){
             displayProducts();
             cout << "Comanda: Introduceti numarul produsului si cantitatea sau 'x' pentru iesire." << endl;
 
             int numar, cantitate;
             int total = 0;
-            string fullOrder = name + ","; // Inițializare linie completă cu numele clientului
+            string fullOrder = user.getNume() + ","; // Inițializare linie completă cu numele clientului
 
             while (true) {
                 cout << "Numar produs si cantitate: ";
@@ -101,6 +102,10 @@ class Cafenea{
                 file.close();
             }
 
+            if(user.returneazaNrComenzi() > 3){
+                cout << "Felicitari! Ai primit un voucher de 10% reducere pentru ca esti client fidel." << endl;
+                total = total - (total * 0.1);
+            }
             cout << "Total comanda: " << total << endl;
             return total;
         }

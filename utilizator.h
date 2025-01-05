@@ -58,6 +58,7 @@ class Utilizator{
     private:
         string nume;
         string parola;
+        int nrComenzi = 0;
 
     public:
 
@@ -128,6 +129,13 @@ class Utilizator{
         }
         //absractization
         virtual string getNume();
+
+        void nrComenziPlus(){
+            nrComenzi++;
+        }
+        int returneazaNrComenzi(){
+            return nrComenzi;
+        }
 
 };
 

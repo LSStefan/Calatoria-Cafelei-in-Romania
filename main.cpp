@@ -296,16 +296,17 @@ void menu(int isRomanian) {
                 break;
             case 5:
                 if(nume_oras == "Bucuresti"){
-                    profit_zilnic += bucuresti.placeorder(user.getNume());
+                    profit_zilnic += bucuresti.placeorder(user);
                 } else if(nume_oras == "Cluj-Napoca"){
-                    profit_zilnic += cluj.placeorder(user.getNume());
+                    profit_zilnic += cluj.placeorder(user);
                 } else if(nume_oras == "Iasi"){
-                    profit_zilnic += iasi.placeorder(user.getNume());
+                    profit_zilnic += iasi.placeorder(user);
                 } else if(nume_oras == "Timisoara"){
-                    profit_zilnic += timisoara.placeorder(user.getNume());
+                    profit_zilnic += timisoara.placeorder(user);
                 } else if(nume_oras == "Brasov"){
-                    profit_zilnic += brasov.placeorder(user.getNume());
+                    profit_zilnic += brasov.placeorder(user);
                 }
+                user.nrComenziPlus();
                 break;
             case 6:
                 if(role == 1){
