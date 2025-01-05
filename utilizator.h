@@ -125,9 +125,14 @@ class Utilizator{
             throw "Utilizatorul nu exista!";
         }
 
-        void placeorder(Cafenea cafenea,string oras){
-            cafenea.displayProducts(oras);
-            
+        void placeorder(Cafenea cafenea){
+            cafenea.displayProducts();
+            cout << "Comanda:numarul produsului/cantitate" << endl;
+            cout << "Introduceti numarul produsului si cantitatea: ";
+            int numar,cantitate;
+            cin >> numar >> cantitate;
+            ofstream file;
+            file.open("comenzi.csv", ios::app);
         }
 
 };

@@ -24,3 +24,27 @@ void displayEmployees(string locatie){
                 }
             }
         }
+
+void displayProducts(string locatie){
+            ifstream file;
+            file.open("produse.csv");
+            string line;
+            int i = 1;
+            while (getline(file, line))
+            {
+                string oras = line.substr(0, line.find(","));
+                
+                if (oras == locatie) {
+                    stringstream ss(line);
+                    string oras,tip,nume,pret;
+
+                    getline(ss, oras, ',');
+                    getline(ss, tip, ',');
+                    getline(ss, nume, ',');
+                    getline(ss, pret, ',');
+
+                    cout <<  i << "." <<  oras << "," << tip << "," << nume << "," << pret << endl;
+                    i++;
+                }
+            }
+        }

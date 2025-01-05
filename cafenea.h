@@ -31,34 +31,42 @@ class Cafenea{
             nrProduse++;
         }
 
-        void displayEmployees(Angajat angajati[],int nrAngajati){
+        void displayEmployees(){
             for (int i = 0; i < nrAngajati; i++){
                 cout << angajati[i].nume << "," << angajati[i].functie << "," << angajati[i].inceputMunca << "," << angajati[i].sfarsitMunca << endl;
             }
         }
 
-        void displayProducts(string locatie){
-            ifstream file;
-            file.open("produse.csv");
-            string line;
-            int i = 1;
-            while (getline(file, line))
-            {
-                string oras = line.substr(0, line.find(","));
-                
-                if (oras == locatie) {
-                    stringstream ss(line);
-                    string oras,tip,nume,pret;
+        void displayProducts(){
+            for (int i = 0; i < nrProduse; i++){
+                cout << i+1  << "," << produse[i].nume << "," << produse[i].pret << endl;
+            }
+        }
 
-                    getline(ss, oras, ',');
-                    getline(ss, tip, ',');
-                    getline(ss, nume, ',');
-                    getline(ss, pret, ',');
+        void placeorder(){
+            displayProducts();
+            cout << "Comanda:numarul produsului/cantitate" << endl;
+            cout << "Introduceti numarul produsului si cantitatea: ";
+            int numar,cantitate;
+            cin >> numar >> cantitate;
 
-                    cout <<  i << "." <<  oras << "," << tip << "," << nume << "," << pret << endl;
-                    i++;
+            int total = 0;
+            for (int i = 0; i < nrProduse; i++){
+                if (numar == i+1){
+                    total = stoi(produse[i].pret) * cantitate;
+                    cout << "Total: " << total << endl;
                 }
             }
+
+            ofstream file;
+            file.open("comenzi.csv", ios::app);
+            string line = locatie + "," + produse[numar-1].nume + "," + to_string(cantitate) + "," + to_string(total);
+            file << line << endl;
+        }
+
+        void clear(){
+            nrAngajati = 0;
+            nrProduse = 0;
         }
 
 };

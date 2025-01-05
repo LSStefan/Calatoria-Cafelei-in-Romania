@@ -75,6 +75,10 @@ void startup(){
     file2.close();
 }
 
+void free(){
+    
+}
+
 
 int choose_language(int &choice){
     cout << "Alege limba / Choose language: " << endl;
@@ -144,7 +148,7 @@ void menu(int isRomanian) {
         cout << "==================================" << endl;
         cout << "          Autentificare            " << endl;
         cout << "==================================" << endl;
-        cout << "1.Sign up" << endl;
+        cout << "1. Sign up" << endl;
         cout << "2. Login" << endl;
         cout << "3. Exit" << endl;
         cout << "Select an option: ";
@@ -214,79 +218,105 @@ void menu(int isRomanian) {
     system("clear");
 
     // Meniu principal
-    cout << "==================================" << endl;
-    if (isRomanian == 1) {
-        cout << "          Meniu principal          " << endl;
+    while(true){
         cout << "==================================" << endl;
-        cout << "1. Adauga angajat" << endl;
-        cout << "2. Afiseaza angajatii" << endl;
-        cout << "3. Afiseaza produsele" << endl;
-        cout << "4. Sterge angajat" << endl;
-        cout << "5. Iesire" << endl;
-        cout << "6. Inapoi" << endl;
-        cout << "7. Comanda" << endl;
-    } else {
-        cout << "          Main Menu                " << endl;
+        if (isRomanian == 1) {
+            cout << "          Meniu principal          " << endl;
+            cout << "==================================" << endl;
+            cout << "1. Adauga angajat" << endl;
+            cout << "2. Afiseaza angajatii" << endl;
+            cout << "3. Afiseaza produsele" << endl;
+            cout << "4. Sterge angajat" << endl;
+            cout << "5. Comanda" << endl;
+            cout << "6. Iesire" << endl;
+            cout << "7. Inapoi" << endl;
+            
+        } else {
+            cout << "          Main Menu                " << endl;
+            cout << "==================================" << endl;
+            cout << "1. Add employee" << endl;
+            cout << "2. Display employees" << endl;
+            cout << "3. Display products" << endl;
+            cout << "4. Remove employee" << endl;
+            cout << "5. Order" << endl;
+            cout << "6. Exit" << endl;
+            cout << "7. Back" << endl;
+            
+        }
         cout << "==================================" << endl;
-        cout << "1. Add employee" << endl;
-        cout << "2. Display employees" << endl;
-        cout << "3. Display products" << endl;
-        cout << "4. Remove employee" << endl;
-        cout << "5. Exit" << endl;
-        cout << "6. Back" << endl;
-        cout << "7. Order" << endl;
-    }
-    cout << "==================================" << endl;
-    cout << "Select an option: ";
+        cout << "Select an option: ";
 
-    int optiune;
-    cin >> optiune;
+        int optiune;
+        cin >> optiune;
 
-    // Gestionarea optiunilor
-    switch (optiune) {
-        case 1:
-            if(role == 1){
-            Manager manager;
-            manager.addEmployee();
-            } else {
-                cout << "Utilizatorul nu are permisiunea de a adauga angajati." << endl;
-            }
-            break;
-        case 2: 
-            if(nume_oras == "Bucuresti"){
-                bucuresti.displayEmployees(bucuresti.angajati, bucuresti.nrAngajati);
-            } else if(nume_oras == "Cluj-Napoca"){
-                cluj.displayEmployees(cluj.angajati, cluj.nrAngajati);
-            } else if(nume_oras == "Iasi"){
-                iasi.displayEmployees(iasi.angajati, iasi.nrAngajati);
-            } else if(nume_oras == "Timisoara"){
-                timisoara.displayEmployees(timisoara.angajati, timisoara.nrAngajati);
-            } else if(nume_oras == "Brasov"){
-                brasov.displayEmployees(brasov.angajati, brasov.nrAngajati);
-            }
-            break;
-        case 3:
-            cafenea.displayProducts(nume_oras);
-            break;
-        case 4:
-            if(role == 1){
+        // Gestionarea optiunilor
+        switch (optiune) {
+            case 1:
+                if(role == 1){
                 Manager manager;
-                manager.removeEmployee(nume_oras);
-            }else{
-                cout << "Utilizatorul nu are permisiunea de a sterge angajati." << endl;
-            }
-            break;
-        case 5:
-            menu(isRomanian);
-            break;
-        case 7:
-            if(role == 2){
-                utilizator.placeorder(cluj,"Cluj-Napoca");
-            }
-            break;
-        default:
-            cout << "Optiune invalida! Incercati din nou." << endl;
+                manager.addEmployee();
+                startup();
+                } else {
+                    cout << "Utilizatorul nu are permisiunea de a adauga angajati." << endl;
+                }
+                break;
+            case 2: 
+                if(nume_oras == "Bucuresti"){
+                    bucuresti.displayEmployees();
+                } else if(nume_oras == "Cluj-Napoca"){
+                    cluj.displayEmployees();
+                } else if(nume_oras == "Iasi"){
+                    iasi.displayEmployees();
+                } else if(nume_oras == "Timisoara"){
+                    timisoara.displayEmployees();
+                } else if(nume_oras == "Brasov"){
+                    brasov.displayEmployees();
+                }
+                break;
+            case 3:
+                if(nume_oras == "Bucuresti"){
+                    bucuresti.displayProducts();
+                } else if(nume_oras == "Cluj-Napoca"){
+                    cluj.displayProducts();
+                } else if(nume_oras == "Iasi"){
+                    iasi.displayProducts();
+                } else if(nume_oras == "Timisoara"){
+                    timisoara.displayProducts();
+                } else if(nume_oras == "Brasov"){
+                    brasov.displayProducts();
+                }
+                break;
+            case 4:
+                if(role == 1){
+                    Manager manager;
+                    manager.removeEmployee(nume_oras);
+                }else{
+                    cout << "Utilizatorul nu are permisiunea de a sterge angajati." << endl;
+                }
+                break;
+            case 5:
+                if(nume_oras == "Bucuresti"){
+                    bucuresti.placeorder();
+                } else if(nume_oras == "Cluj-Napoca"){
+                    cluj.placeorder();
+                } else if(nume_oras == "Iasi"){
+                    iasi.placeorder();
+                } else if(nume_oras == "Timisoara"){
+                    timisoara.placeorder();
+                } else if(nume_oras == "Brasov"){
+                    brasov.placeorder();
+                }
+                break;
+            case 6:
+                return;
+            case 7:
+                menu(isRomanian);
+                break;
+            default:
+                cout << "Optiune invalida! Incercati din nou." << endl;
+        }
     }
+   
 }
 
 
@@ -295,14 +325,9 @@ void menu(int isRomanian) {
 int main(){
 
     startup();
-    // int choice;
-    // choose_language(choice);
-    // menu(choice);
-
-    
-    for(int i = 0;i < 3;i++){
-        cout << bucuresti.produse[i].nume << endl;
-    }
+    int choice;
+    choose_language(choice);
+    menu(choice);
 
     return 0;
 }
