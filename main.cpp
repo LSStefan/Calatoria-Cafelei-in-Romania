@@ -5,6 +5,7 @@
 #include "cafenea.h"
 #include "manager.h"
 #include "utilizator.h"
+#include "produs.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ Cafenea iasi("Iasi");
 Cafenea timisoara("Timisoara");
 Cafenea brasov("Brasov");
 
+Utilizator utilizator;
 
 void startup(){
     ifstream file;
@@ -46,6 +48,31 @@ void startup(){
             brasov.angajeaza(angajat);
         }
     }
+    file.close();
+    ifstream file2;
+    file2.open("produse.csv");
+    while(getline(file2,line)){
+        stringstream ss(line);
+        string oras, tip, nume, pret;
+        getline(ss, oras, ',');
+        getline(ss, tip, ',');
+        getline(ss, nume, ',');
+        getline(ss, pret, ',');
+        Produs produs(oras, nume, pret);
+        if(oras == "Bucuresti"){
+            bucuresti.adaugaProdus(produs);
+        } else if(oras == "Cluj-Napoca"){
+            cluj.adaugaProdus(produs);
+        } else if(oras == "Iasi"){
+            iasi.adaugaProdus(produs);
+        } else if(oras == "Timisoara"){
+            timisoara.adaugaProdus(produs);
+        } else if(oras == "Brasov"){
+            brasov.adaugaProdus(produs);
+        }
+    }
+
+    file2.close();
 }
 
 
@@ -197,6 +224,7 @@ void menu(int isRomanian) {
         cout << "4. Sterge angajat" << endl;
         cout << "5. Iesire" << endl;
         cout << "6. Inapoi" << endl;
+        cout << "7. Comanda" << endl;
     } else {
         cout << "          Main Menu                " << endl;
         cout << "==================================" << endl;
@@ -206,6 +234,7 @@ void menu(int isRomanian) {
         cout << "4. Remove employee" << endl;
         cout << "5. Exit" << endl;
         cout << "6. Back" << endl;
+        cout << "7. Order" << endl;
     }
     cout << "==================================" << endl;
     cout << "Select an option: ";
@@ -250,6 +279,11 @@ void menu(int isRomanian) {
         case 5:
             menu(isRomanian);
             break;
+        case 7:
+            if(role == 2){
+                utilizator.placeorder(cluj,"Cluj-Napoca");
+            }
+            break;
         default:
             cout << "Optiune invalida! Incercati din nou." << endl;
     }
@@ -261,12 +295,14 @@ void menu(int isRomanian) {
 int main(){
 
     startup();
-    int choice;
-    choose_language(choice);
-    menu(choice);
+    // int choice;
+    // choose_language(choice);
+    // menu(choice);
 
     
-
+    for(int i = 0;i < 3;i++){
+        cout << bucuresti.produse[i].nume << endl;
+    }
 
     return 0;
 }

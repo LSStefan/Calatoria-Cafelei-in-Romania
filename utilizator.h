@@ -125,5 +125,9 @@ class Utilizator{
             throw "Utilizatorul nu exista!";
         }
 
+        void placeorder(Cafenea cafenea,string oras){
+            cafenea.displayProducts(oras);
+            
+        }
 
 };

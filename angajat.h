@@ -27,5 +27,6 @@ class Angajat{
 
         //friend class
         friend class Cafenea;
+        friend class Manager;
 };
 #endif

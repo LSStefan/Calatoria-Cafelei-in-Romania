@@ -45,11 +45,11 @@ class Manager : public Angajat{
             {
                 stringstream ss(line);
                 string oras, numeFisier, functie, inceputMunca, sfarsitMunca;
-                getline(ss, oras, ',');           // Extrage orașul
-                getline(ss, numeFisier, ',');          // Extrage numele
-                getline(ss, functie, ',');       // Extrage funcția
-                getline(ss, inceputMunca, ',');  // Extrage ora de început
-                getline(ss, sfarsitMunca, ',');  // Extrage ora de sfârșit
+                getline(ss, oras, ',');      
+                getline(ss, numeFisier, ',');       
+                getline(ss, functie, ',');   
+                getline(ss, inceputMunca, ','); 
+                getline(ss, sfarsitMunca, ',');  
                 if (numeFisier != nume){
                     tempFile << oras << "," << numeFisier << "," << functie << "," << inceputMunca << "," << sfarsitMunca << endl;
                 }

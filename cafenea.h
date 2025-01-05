@@ -2,13 +2,16 @@
 #include <fstream>
 #include <sstream>
 #include "angajat.h"
+#include "produs.h"
 
 using namespace std;
 
 class Cafenea{
     public:
         Angajat angajati[20];
+        Produs produse[20];
         int nrAngajati = 0;
+        int nrProduse = 0;
         string locatie;
 
     public:
@@ -23,6 +26,11 @@ class Cafenea{
             nrAngajati++;
         }
 
+        void adaugaProdus(Produs produs){
+            produse[nrProduse] = produs;
+            nrProduse++;
+        }
+
         void displayEmployees(Angajat angajati[],int nrAngajati){
             for (int i = 0; i < nrAngajati; i++){
                 cout << angajati[i].nume << "," << angajati[i].functie << "," << angajati[i].inceputMunca << "," << angajati[i].sfarsitMunca << endl;
@@ -33,20 +41,22 @@ class Cafenea{
             ifstream file;
             file.open("produse.csv");
             string line;
+            int i = 1;
             while (getline(file, line))
             {
                 string oras = line.substr(0, line.find(","));
                 
                 if (oras == locatie) {
                     stringstream ss(line);
-                    string oras, nume, pret, cantitate;
+                    string oras,tip,nume,pret;
 
                     getline(ss, oras, ',');
+                    getline(ss, tip, ',');
                     getline(ss, nume, ',');
                     getline(ss, pret, ',');
-                    getline(ss, cantitate, ',');
 
-                    cout << nume << "," << pret << "," << cantitate << endl;
+                    cout <<  i << "." <<  oras << "," << tip << "," << nume << "," << pret << endl;
+                    i++;
                 }
             }
         }
