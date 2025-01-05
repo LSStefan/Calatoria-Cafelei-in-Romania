@@ -3,6 +3,7 @@
 #include <sstream>
 #include "angajat.h"
 #include "produs.h"
+#include <vector>
 
 using namespace std;
 
@@ -39,30 +40,69 @@ class Cafenea{
 
         void displayProducts(){
             for (int i = 0; i < nrProduse; i++){
-                cout << i+1  << "," << produse[i].nume << "," << produse[i].pret << endl;
+                cout << i+1  << "." << produse[i].nume << "," << produse[i].pret << endl;
             }
         }
 
-        void placeorder(){
+       void placeorder(string name) {
             displayProducts();
-            cout << "Comanda:numarul produsului/cantitate" << endl;
-            cout << "Introduceti numarul produsului si cantitatea: ";
-            int numar,cantitate;
-            cin >> numar >> cantitate;
+            cout << "Comanda: Introduceti numarul produsului si cantitatea sau 'x' pentru iesire." << endl;
 
+            int numar, cantitate;
             int total = 0;
-            for (int i = 0; i < nrProduse; i++){
-                if (numar == i+1){
-                    total = stoi(produse[i].pret) * cantitate;
-                    cout << "Total: " << total << endl;
+            string fullOrder = name + ","; // Inițializare linie completă cu numele clientului
+
+            while (true) {
+                cout << "Numar produs si cantitate: ";
+                string input;
+                cin >> input;
+
+                if (input == "x") {
+                    break; // Iesire din buclă
+                }
+
+                try {
+                    // Parsează numărul produsului și cantitatea
+                    numar = stoi(input);
+                    cin >> cantitate;
+
+                    // Validare intrări
+                    if (numar < 1 || numar > nrProduse) {
+                        cout << "Numar produs invalid. Incercati din nou." << endl;
+                        continue;
+                    }
+                    if (cantitate <= 0) {
+                        cout << "Cantitate invalida. Incercati din nou." << endl;
+                        continue;
+                    }
+
+                    // Calculează totalul pentru produsul selectat
+                    int subtotal = stoi(produse[numar - 1].pret) * cantitate;
+                    total += subtotal;
+
+                    // Adaugă detaliile produsului în linia completă
+                    fullOrder += produse[numar - 1].nume + ":" + to_string(cantitate) + ":" + to_string(subtotal) + ";";
+
+                    cout << "Produs adaugat: " << produse[numar - 1].nume << ", Cantitate: " << cantitate 
+                        << ", Subtotal: " << subtotal << endl;
+                } catch (const invalid_argument&) {
+                    cout << "Intrare invalida. Incercati din nou." << endl;
                 }
             }
 
-            ofstream file;
-            file.open("comenzi.csv", ios::app);
-            string line = locatie + "," + produse[numar-1].nume + "," + to_string(cantitate) + "," + to_string(total);
-            file << line << endl;
+            // Adaugă totalul comenzii la finalul liniei
+            fullOrder += "Total:" + to_string(total);
+
+            // Scrie comanda întreagă în fișier
+            if (total > 0) {
+                ofstream file("comenzi.csv", ios::app);
+                file << fullOrder << endl;
+                file.close();
+            }
+
+            cout << "Total comanda: " << total << endl;
         }
+
 
         void clear(){
             nrAngajati = 0;

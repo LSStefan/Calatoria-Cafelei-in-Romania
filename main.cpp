@@ -16,7 +16,7 @@ Cafenea iasi("Iasi");
 Cafenea timisoara("Timisoara");
 Cafenea brasov("Brasov");
 
-Utilizator utilizator;
+Utilizator user;
 
 void startup(){
     ifstream file;
@@ -75,9 +75,6 @@ void startup(){
     file2.close();
 }
 
-void free(){
-    
-}
 
 
 int choose_language(int &choice){
@@ -144,7 +141,6 @@ void menu(int isRomanian) {
         system("clear");
     }else{
         system("clear");
-        Utilizator user;
         cout << "==================================" << endl;
         cout << "          Autentificare            " << endl;
         cout << "==================================" << endl;
@@ -296,15 +292,15 @@ void menu(int isRomanian) {
                 break;
             case 5:
                 if(nume_oras == "Bucuresti"){
-                    bucuresti.placeorder();
+                    bucuresti.placeorder(user.getNume());
                 } else if(nume_oras == "Cluj-Napoca"){
-                    cluj.placeorder();
+                    cluj.placeorder(user.getNume());
                 } else if(nume_oras == "Iasi"){
-                    iasi.placeorder();
+                    iasi.placeorder(user.getNume());
                 } else if(nume_oras == "Timisoara"){
-                    timisoara.placeorder();
+                    timisoara.placeorder(user.getNume());
                 } else if(nume_oras == "Brasov"){
-                    brasov.placeorder();
+                    brasov.placeorder(user.getNume());
                 }
                 break;
             case 6:

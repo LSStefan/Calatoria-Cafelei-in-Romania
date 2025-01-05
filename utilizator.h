@@ -55,8 +55,9 @@ string encrypt(string str, string key)
 
 
 class Utilizator{
-    string nume;
-    string parola;
+    private:
+        string nume;
+        string parola;
 
     public:
 
@@ -68,6 +69,7 @@ class Utilizator{
             passwordFileCheck.open("passwords.csv");
             cout << "Introduceti numele de utilizator: ";
             cin >> nume;
+            this->nume = nume;
             string line;
 
             while(getline(passwordFileCheck, line)){
@@ -124,15 +126,11 @@ class Utilizator{
             }
             throw "Utilizatorul nu exista!";
         }
-
-        void placeorder(Cafenea cafenea){
-            cafenea.displayProducts();
-            cout << "Comanda:numarul produsului/cantitate" << endl;
-            cout << "Introduceti numarul produsului si cantitatea: ";
-            int numar,cantitate;
-            cin >> numar >> cantitate;
-            ofstream file;
-            file.open("comenzi.csv", ios::app);
-        }
+        //absractization
+        virtual string getNume();
 
 };
+
+string Utilizator::getNume(){
+    return nume;
+}
