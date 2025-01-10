@@ -2,14 +2,14 @@
 #include <fstream>
 #include <stdlib.h>
 
-#include "cafenea.h"
-#include "manager.h"
-#include "utilizator.h"
-#include "produs.h"
+#include "headere/cafenea.h"
+#include "headere/manager.h"
+#include "headere/utilizator.h"
+#include "headere/produs.h"
 
 using namespace std;
 
-
+//instantierea obiectelor de tip cafenea folosind Singleton
 Cafenea bucuresti("Bucuresti");
 Cafenea cluj("Cluj-Napoca");
 Cafenea iasi("Iasi");
