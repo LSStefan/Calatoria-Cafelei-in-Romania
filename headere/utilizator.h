@@ -141,7 +141,7 @@ class Utilizator{
 };
 
 string Utilizator::getNume(){
-    return nume;
+    return this->nume;
 }
 
 void Utilizator::comenziPlus(){

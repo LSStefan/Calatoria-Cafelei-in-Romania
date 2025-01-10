@@ -1,5 +1,5 @@
 # Numele executabilului
-TARGET = cafea
+TARGET = cafenea
 
 # Compilatorul folosit
 CXX = g++
