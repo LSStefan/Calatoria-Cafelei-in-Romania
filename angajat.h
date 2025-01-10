@@ -9,8 +9,10 @@ class Angajat{
         string functie;
         string inceputMunca;
         string sfarsitMunca;
+        int salariu;
 
     public:
+        //polimorfism constructor
         Angajat(){
             nume = "";
             functie = "";

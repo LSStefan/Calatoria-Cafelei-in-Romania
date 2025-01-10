@@ -18,35 +18,76 @@ Cafenea brasov("Brasov");
 
 Utilizator user;
 
+
 int profit_zilnic = 0;
 
+// Generarea raportului
+
+
+
 void generareRaport(){
-    ofstream file;
-    file.open("raport.csv", ios::app);
-    file << "Profit zilnic: " << profit_zilnic << endl;
-    int salariiangajati;
-    if(bucuresti.nrAngajati > 0){
-        salariiangajati = bucuresti.nrAngajati * 3000;
-        file << "Salarii angajati Bucuresti: " << salariiangajati << endl;
+    int isRomanian;
+    cout << "Alege limba in care vrei sa exportezi raportul/ Choose the language in which you want to export the report: " << endl;
+    cout << "1. Romanian" << endl;
+    cout << "2. English" << endl;
+    cout << "Select an option: ";
+    cin >> isRomanian;
+    if(isRomanian == 1){
+        ofstream file;
+        file.open("raport.csv", ios::app);
+        file << "Profit zilnic: " << profit_zilnic << endl;
+        int salariiangajati;
+        if(bucuresti.nrAngajati > 0){
+            salariiangajati = bucuresti.nrManageri * 4000  + bucuresti.nrOspatari * 2500 + bucuresti.nrBarista * 2500;
+            file << "Salarii angajati Bucuresti: " << salariiangajati << endl;
+        }
+        if(cluj.nrAngajati > 0){
+            salariiangajati = cluj.nrManageri * 3200 + cluj.nrOspatari * 2500 + cluj.nrBarista * 2500;
+            file << "Salarii angajati Cluj-Napoca: " << salariiangajati << endl;
+        }
+        if(iasi.nrAngajati > 0){
+            salariiangajati = iasi.nrManageri * 3500 + iasi.nrOspatari * 2500 + iasi.nrBarista * 2500;
+            file << "Salarii angajati Iasi: " << salariiangajati << endl;
+        }
+        if(timisoara.nrAngajati > 0){
+            salariiangajati = timisoara.nrManageri * 3000 + timisoara.nrOspatari * 2500 + timisoara.nrBarista * 2500;
+            file << "Salarii angajati Timisoara: " << salariiangajati << endl;
+        }
+        if(brasov.nrAngajati > 0){
+            salariiangajati = brasov.nrManageri * 3500 + brasov.nrOspatari * 2500 + brasov.nrBarista * 2500;
+            file << "Salarii angajati Brasov: " << salariiangajati << endl;
+        }
+        file << "\n \n";
+        file.close();
+    }else{
+        ofstream file;
+        file.open("raport.csv", ios::app);
+        file << "Daily profit: " << profit_zilnic << endl;
+        int salariiangajati;
+        if(bucuresti.nrAngajati > 0){
+            salariiangajati = bucuresti.nrManageri * 4000  + bucuresti.nrOspatari * 2500 + bucuresti.nrBarista * 2500;
+            file << "Salaries Bucuresti: " << salariiangajati << endl;
+        }
+        if(cluj.nrAngajati > 0){
+            salariiangajati = cluj.nrManageri * 3200 + cluj.nrOspatari * 2500 + cluj.nrBarista * 2500;
+            file << "Salaries Cluj-Napoca: " << salariiangajati << endl;
+        }
+        if(iasi.nrAngajati > 0){
+            salariiangajati = iasi.nrManageri * 3500 + iasi.nrOspatari * 2500 + iasi.nrBarista * 2500;
+            file << "Salaries Iasi: " << salariiangajati << endl;
+        }
+        if(timisoara.nrAngajati > 0){
+            salariiangajati = timisoara.nrManageri * 3000 + timisoara.nrOspatari * 2500 + timisoara.nrBarista * 2500;
+            file << "Salaries Timisoara: " << salariiangajati << endl;
+        }
+        if(brasov.nrAngajati > 0){
+            salariiangajati = brasov.nrManageri * 3500 + brasov.nrOspatari * 2500 + brasov.nrBarista * 2500;
+            file << "Salaries Brasov: " << salariiangajati << endl;
+        }
+        file << "\n \n";
+        file.close();
     }
-    if(cluj.nrAngajati > 0){
-        salariiangajati = cluj.nrAngajati * 2000;
-        file << "Salarii angajati Cluj-Napoca: " << salariiangajati << endl;
-    }
-    if(iasi.nrAngajati > 0){
-        salariiangajati = iasi.nrAngajati * 2000;
-        file << "Salarii angajati Iasi: " << salariiangajati << endl;
-    }
-    if(timisoara.nrAngajati > 0){
-        salariiangajati = timisoara.nrAngajati * 2500;
-        file << "Salarii angajati Timisoara: " << salariiangajati << endl;
-    }
-    if(brasov.nrAngajati > 0){
-        salariiangajati = brasov.nrAngajati * 2900;
-        file << "Salarii angajati Brasov: " << salariiangajati << endl;
-    }
-    file << "\n";
-    file.close();
+    
 }
 
 void startup(){
@@ -255,8 +296,11 @@ void menu(int isRomanian) {
             cout << "4. Sterge angajat" << endl;
             cout << "5. Comanda" << endl;
             cout << "6. Adauga eveniment special" << endl;
-            cout << "7. Iesire" << endl;
+            cout << "7. Iesire si generare raport" << endl;
             cout << "8. Inapoi" << endl;
+            cout << "9.Adauga produs" << endl;
+            cout << "10. Sterge produs" << endl;
+
             
         } else {
             cout << "          Main Menu                " << endl;
@@ -267,8 +311,10 @@ void menu(int isRomanian) {
             cout << "4. Remove employee" << endl;
             cout << "5. Order" << endl;
             cout << "6. Add special event" << endl;
-            cout << "7. Exit" << endl;
+            cout << "7. Exit and generate daily raport" << endl;
             cout << "8. Back" << endl;
+            cout << "9. Add product" << endl;
+            cout << "10. Remove product" << endl;
             
         }
         cout << "==================================" << endl;
@@ -334,7 +380,7 @@ void menu(int isRomanian) {
                 } else if(nume_oras == "Brasov"){
                     profit_zilnic += brasov.placeorder(user);
                 }
-                user.nrComenziPlus();
+                user.comenziPlus();
                 break;
             case 6:
                 if(role == 1){
@@ -360,6 +406,41 @@ void menu(int isRomanian) {
             case 8:
                 system("clear");
                 menu(isRomanian);
+                break;
+            case 9:
+                if(role == 1){
+                    if(nume_oras == "Bucuresti"){
+                        bucuresti.addProduct();
+                    } else if(nume_oras == "Cluj-Napoca"){
+                        cluj.addProduct();
+                    } else if(nume_oras == "Iasi"){
+                        iasi.addProduct();
+                    } else if(nume_oras == "Timisoara"){
+                        timisoara.addProduct();
+                    } else if(nume_oras == "Brasov"){
+                        brasov.addProduct();
+                    }
+                } else {
+                    cout << "Utilizatorul nu are permisiunea de a adauga produse." << endl;
+                }
+                break;
+            case 10:
+                if(role == 1){
+                    if(nume_oras == "Bucuresti"){
+                        bucuresti.removeProduct();
+                    } else if(nume_oras == "Cluj-Napoca"){
+                        cluj.removeProduct();
+                    } else if(nume_oras == "Iasi"){
+                        iasi.removeProduct();
+                    } else if(nume_oras == "Timisoara"){
+                        timisoara.removeProduct();
+                    } else if(nume_oras == "Brasov"){
+                        brasov.removeProduct();
+                    }
+                    startup();
+                } else {
+                    cout << "Utilizatorul nu are permisiunea de a sterge produse." << endl;
+                }
                 break;
             default:
                 cout << "Optiune invalida! Incercati din nou." << endl;

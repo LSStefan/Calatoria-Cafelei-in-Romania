@@ -13,6 +13,9 @@ class Cafenea{
         Angajat angajati[20];
         Produs produse[20];
         int nrAngajati = 0;
+        int nrManageri = 0;
+        int nrOspatari = 0;
+        int nrBarista = 0;
         int nrProduse = 0;
         string locatie;
         vector<string> evenimente;
@@ -37,6 +40,13 @@ class Cafenea{
         void angajeaza(Angajat angajat){
             angajati[nrAngajati] = angajat;
             nrAngajati++;
+            if(angajat.functie == "Manager"){
+                nrManageri++;
+            } else if(angajat.functie == "Ospatar"){
+                nrOspatari++;
+            } else if(angajat.functie == "Barista"){
+                nrBarista++;
+            }
         }
 
         void adaugaProdus(Produs produs){
@@ -56,13 +66,13 @@ class Cafenea{
             }
         }
 
-       float placeorder(Utilizator user){
+       float placeorder(Utilizator user) {
             displayProducts();
             cout << "Comanda: Introduceti numarul produsului si cantitatea sau 'x' pentru iesire." << endl;
 
             int numar, cantitate;
-            int total = 0;
-            string fullOrder = user.getNume() + ","; // Inițializare linie completă cu numele clientului
+            float total = 0.0f;
+            string fullOrder = user.getNume() + ","; 
 
             while (true) {
                 cout << "Numar produs si cantitate: ";
@@ -70,14 +80,14 @@ class Cafenea{
                 cin >> input;
 
                 if (input == "x") {
-                    break; // Iesire din buclă
+                    break;
                 }
 
                 try {
-                    // Parsează numărul produsului și cantitatea
+                    // Parseaza numarul si cantitatea
                     numar = stoi(input);
                     cin >> cantitate;
-                    // Validare intrări
+
                     if (numar < 1 || numar > nrProduse) {
                         cout << "Numar produs invalid. Incercati din nou." << endl;
                         continue;
@@ -87,39 +97,74 @@ class Cafenea{
                         continue;
                     }
 
-                    // Calculează totalul pentru produsul selectat
-                    int subtotal = stoi(produse[numar - 1].pret) * cantitate;
+                    float subtotal = stof(produse[numar - 1].pret) * cantitate;
                     total += subtotal;
 
-                    // Adaugă detaliile produsului în linia completă
                     fullOrder += produse[numar - 1].nume + ":" + to_string(cantitate) + ":" + to_string(subtotal) + ";";
 
-                    cout << "Produs adaugat: " << produse[numar - 1].nume << ", Cantitate: " << cantitate 
+                    // Actualizeaza cantitatea produsului
+                    produse[numar - 1].cantitate -= cantitate;
+
+                    cout << "Produs adaugat: " << produse[numar - 1].nume << ", Cantitate: " << cantitate
                         << ", Subtotal: " << subtotal << endl;
                 } catch (const invalid_argument&) {
                     cout << "Intrare invalida. Incercati din nou." << endl;
                 }
             }
 
-            // Adaugă totalul comenzii la finalul liniei
             fullOrder += "Total:" + to_string(total);
 
-            // Scrie comanda întreagă în fișier
+            // Scrie comanda întreaga în fisier
             if (total > 0) {
                 ofstream file("comenzi.csv", ios::app);
                 file << fullOrder << endl;
                 file.close();
             }
 
-            if(user.returneazaNrComenzi() > 3){
+            //reducere client fidel
+            if (user.returneazaNrComenzi() > 3) {
                 cout << "Felicitari! Ai primit un voucher de 10% reducere pentru ca esti client fidel." << endl;
-                total = total - (total * 0.1);
+                total -= total * 0.1;
+            }
+             //actualizare stoc
+            ifstream file("produse.csv");
+            ofstream tempFile("temp.csv");
+
+            if (!file.is_open() || !tempFile.is_open()) {
+                cerr << "Eroare la deschiderea fisierului pentru actualizare." << endl;
+                return total;
             }
 
-            produse[numar - 1].cantitate -= cantitate;
+            string line;
+            while (getline(file, line)) {
+                stringstream ss(line);
+                string oras, tip, numeProdus, pret;
+                int cantitateDisponibila;
+
+                getline(ss, oras, ',');
+                getline(ss, tip, ',');
+                getline(ss, numeProdus, ',');
+                getline(ss, pret, ',');
+                ss >> cantitateDisponibila;
+
+                if (oras == this->locatie && numeProdus == produse[numar - 1].nume) {
+                    tempFile << oras << "," << tip << "," << numeProdus << "," << pret << "," << produse[numar - 1].cantitate << endl;
+                } else {
+                    tempFile << oras << "," << tip << "," << numeProdus << "," << pret << "," << cantitateDisponibila << endl;
+                }
+            }
+
+            file.close();
+            tempFile.close();
+
+            remove("produse.csv");
+            rename("temp.csv", "produse.csv");
+
             cout << "Total comanda: " << total << endl;
             return total;
         }
+
+
 
 
         void clear(){
@@ -139,8 +184,10 @@ class Cafenea{
         }
 
         void addProduct(){
-            string nume, pret;
+            string nume, pret,categorie;
             int cantitate;
+            cout << "Introduceti categoria produsului:(Cafea, Ceai, Dulciuri, Sandwichuri) ";
+            cin >> categorie;
             cout << "Introduceti numele produsului: ";
             getline(cin >> ws, nume);
             cout << "Introduceti pretul produsului: ";
@@ -151,35 +198,60 @@ class Cafenea{
             adaugaProdus(produs);
             ofstream file;
             file.open("produse.csv", ios::app);
-            file << this->locatie << "," << nume << "," << pret << endl;
+            file << this->locatie << "," << categorie << "," << nume << "," << pret << "," << cantitate <<  endl;
             file.close();
         }
 
-        void removeProduct(){
+        void removeProduct() {
             string nume;
             cout << "Introduceti numele produsului pe care doriti sa il stergeti: ";
             getline(cin >> ws, nume);
-            ifstream file;
-            ofstream tempFile;
-            file.open("produse.csv");
-            tempFile.open("temp.csv");
-            string line;
-            while (getline(file, line))
-            {
-                stringstream ss(line);
-                string oras, numeFisier, pret;
-                getline(ss, oras, ',');      
-                getline(ss, numeFisier, ',');       
-                getline(ss, pret, ',');   
-                if (numeFisier != nume && oras == this->locatie){
-                    tempFile << oras << "," << numeFisier << "," << pret << endl;
-                }
-            
+
+            ifstream file("produse.csv");
+            ofstream tempFile("temp.csv");
+
+            if (!file.is_open() || !tempFile.is_open()) {
+                cerr << "Eroare la deschiderea fisierului!" << endl;
+                return;
             }
+
+            string line;
+            bool found = false;
+
+            while (getline(file, line)) {
+                stringstream ss(line);
+                string oras, tip, numeFisier, pret, cantitate;
+
+                getline(ss, oras, ',');
+                getline(ss, tip, ',');
+                getline(ss, numeFisier, ',');
+                getline(ss, pret, ',');
+                getline(ss, cantitate, ',');
+
+                if (!(numeFisier == nume && oras == this->locatie)) {
+                    tempFile << oras << "," << tip << "," << numeFisier << "," << pret << "," << cantitate << endl;
+                } else {
+                    found = true;
+                }
+            }
+
             file.close();
             tempFile.close();
-            remove("produse.csv");
-            rename("temp.csv", "produse.csv");
+
+            // Suprascriem fisierul original
+            if (found) {
+                remove("produse.csv");
+                rename("temp.csv", "produse.csv");
+                cout << "Produsul a fost sters cu succes." << endl;
+            } else {
+                cout << "Produsul nu a fost gasit in locatie." << endl;
+                remove("temp.csv");
+            }
+        }
+
+         //destructor
+        ~Cafenea(){
+            delete this;
         }
 
 };

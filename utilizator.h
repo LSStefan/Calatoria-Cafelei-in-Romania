@@ -129,19 +129,26 @@ class Utilizator{
             }
             throw "Utilizatorul nu exista!";
         }
-        //absractization
+        //absraction
         virtual string getNume();
 
-        void nrComenziPlus(){
-            nrComenzi++;
-        }
-        int returneazaNrComenzi(){
-            return nrComenzi;
-        }
+        virtual void comenziPlus();
+
+        virtual int returneazaNrComenzi();
+
+        
 
 };
 
 string Utilizator::getNume(){
     return nume;
+}
+
+void Utilizator::comenziPlus(){
+    this->nrComenzi++;
+}
+
+int Utilizator::returneazaNrComenzi(){
+    return nrComenzi;
 }
 #endif
