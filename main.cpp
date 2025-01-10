@@ -119,7 +119,6 @@ int choose_language(int &choice){
 }
 
 
-Cafenea cafenea;
 
 void menu(int isRomanian) {
     system("clear");

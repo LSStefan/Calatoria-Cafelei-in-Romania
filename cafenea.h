@@ -17,9 +17,19 @@ class Cafenea{
         string locatie;
         vector<string> evenimente;
 
+    private :
+        static Cafenea *instance;  // Singleton
+        Cafenea(){  //constructor privat
+        }
+
+
     public:
-        Cafenea(){
-            locatie = "";
+    // Singleton design pattern
+        static Cafenea* getInstance(){
+            if (!instance){
+                instance = new Cafenea();
+            }
+            return instance;
         }
         Cafenea(string locatie){
             this->locatie = locatie;
